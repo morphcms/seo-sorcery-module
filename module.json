@@ -1,0 +1,17 @@
+{
+    "name": "SeoSorcery",
+    "alias": "seo-sorcery",
+    "description": "",
+    "keywords": [],
+    "priority": 1,
+    "providers": [
+        "Modules\\SeoSorcery\\Providers\\SeoSorceryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "minimumCoreVersion": "",
+    "title": "Seo Sorcery",
+    "version": "0.0.0",
+    "author": "Binome Way"
+}
