@@ -2,11 +2,11 @@
 
 namespace Modules\SeoSorcery\Contracts;
 
+use Modules\SeoSorcery\Utils\SeoOptions;
+
 interface ICanBeSeoAnalyzed
 {
     public function seo();
 
-    public function getSeoAttributeName($field);
-
-    public function getSeoAttributeValue($field);
+    public function getSeoOptions(): SeoOptions;
 }

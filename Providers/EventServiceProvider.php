@@ -24,7 +24,7 @@ class EventServiceProvider extends ServiceProvider
         ],*/
 
         BootSettingsPage::class => [
-            RegisterSettingsListener::class,
+           // RegisterSettingsListener::class,
         ],
 
         /*BuildSchemaString::class => [

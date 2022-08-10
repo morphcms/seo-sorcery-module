@@ -17,11 +17,11 @@ return new class extends Migration {
             $table->id();
             $table->morphs('seoable');
             $table->json('title')->nullable();
-            $table->json('slug')->nullable();
             $table->json('description')->nullable();
-            $table->string('type')->nullable();
             $table->json('keywords')->nullable();
             $table->json('meta')->nullable();
+            $table->json('report')->nullable();
+            $table->timestamp('last_scan_at')->nullable();
             $table->timestamps();
         });
     }

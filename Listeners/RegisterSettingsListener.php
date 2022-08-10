@@ -2,7 +2,7 @@
 
 namespace Modules\SeoSorcery\Listeners;
 
-use Modules\SeoSorcery\Settings\SeoSettingsPage;
+use Modules\SeoSorcery\Settings\SeoSettings;
 use Modules\Settings\Events\BootSettingsPage;
 
 class RegisterSettingsListener
@@ -14,7 +14,7 @@ class RegisterSettingsListener
     public function handle(BootSettingsPage $event): array
     {
         return [
-            new SeoSettingsPage(),
+            new SeoSettings(),
         ];
     }
 }

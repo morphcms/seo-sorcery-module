@@ -4,7 +4,7 @@ namespace Modules\SeoSorcery\Settings;
 
 use Modules\Settings\Pages\Page;
 
-class SeoSettingsPage extends Page
+class SeoSettings extends Page
 {
 
     public function fields(): array

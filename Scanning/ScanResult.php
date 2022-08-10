@@ -7,35 +7,31 @@ use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Fluent;
 use Modules\SeoSorcery\Contracts\IScanResult;
 
-/**
- * @property bool $status
- * @property string $name
- * @property string $help
- * @property string $message
- * @property array $meta
- * @property string $group
- * @method name(string $value = null)
- * @method help(string $value = null)
- * @method message(string $value = null)
- * @method meta(array $values = [])
- * @method group(string $value = null)
- */
-class ScanResult extends Fluent implements IScanResult, Arrayable, Jsonable
+class ScanResult implements IScanResult, Arrayable, Jsonable
 {
+
+    private bool $status;
+    private array $messages = [];
+    private array $meta = [];
+
+    public function __construct(public string $name, public ?string $description = null, public ?string $group = null)
+    {
+
+    }
 
     public static function make(...$arguments): static
     {
         return new static(...$arguments);
     }
 
-    public static function failed(...$args): static
+    public function passed(): IScanResult
     {
-        return (new static(...$args))->status(false);
+        return $this->status(true);
     }
 
-    public static function passed(...$args): static
+    public function failed(): IScanResult
     {
-        return (new static(...$args))->status(true);
+        return $this->status(false);
     }
 
 
@@ -50,20 +46,61 @@ class ScanResult extends Fluent implements IScanResult, Arrayable, Jsonable
     }
 
 
-    public function status(bool $passed, string $message = null): static
+    public function status(bool $passed): static
     {
         $this->status = $passed;
-        $this->message = $message;
-
 
         return $this;
     }
 
-    public function add(string $key, $value): static
+    public function with(string $key, $value): static
     {
         $this->meta[$key] = $value;
 
         return $this;
     }
 
+    public function toArray(): array
+    {
+        return [];
+    }
+
+
+    public function messages(): array
+    {
+        return $this->messages;
+    }
+
+    public function meta(): array
+    {
+        return $this->meta;
+    }
+
+    public function toJson($options = 0): bool|string
+    {
+        return json_encode($this->toArray(), $options);
+    }
+
+    public function put(string $label, string $message, string $help = null): IScanResult
+    {
+        $this->messages[] = compact('label', 'message', 'help');
+
+        return $this;
+    }
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function description(): string
+    {
+        return $this->description;
+    }
+
+    public function group(): string
+    {
+
+        return $this->group;
+    }
 }

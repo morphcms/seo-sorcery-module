@@ -38,6 +38,12 @@ class Sorcery
         return $this;
     }
 
+    /**
+     * @deprecated Use Radar instead
+     *
+     * @param string|array $scanners
+     * @return $this
+     */
     public function registerScanner(string|array $scanners): static
     {
         return $this->registerService($scanners, $this->scanners);
@@ -62,6 +68,13 @@ class Sorcery
         return collect($this->inspectors)->map(fn($inspector) => app($inspector)->inspect());
     }
 
+    /**
+     * @deprecated Use Radar instead
+     *
+     * @param ICanBeSeoAnalyzed|array $model
+     * @param string|ICanScan|null $scanner
+     * @return Collection|IScanResult
+     */
     public function analyze(ICanBeSeoAnalyzed|array $model, string|ICanScan $scanner = null): Collection|IScanResult
     {
         if (!is_null($scanner)) {
